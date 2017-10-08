@@ -18,17 +18,11 @@ app.use(bp.urlencoded({
 
 app.use(bp.json());
 
-//requiring the javascript files with the data
-// const beer = require('./app/data/beer.js');
-// const mt = require('./app/data/mtBottle.js');
-
 //requiring handlebars
 const exphb = require('express-handlebars');
 
 //set express to use handlebars as a view engine
-app.engine('handlebars', exphb({
-    defaultLayout: 'main'
-}));
+app.engine('handlebars', exphb({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //requiring mysql
@@ -42,7 +36,7 @@ const conn = mysql.createConnection({
     database: 'beersDB'
 });
 
-//establish the connection for mysql
+//establishing the connection for mysql
 conn.connect((error) => {
     if (error) {
         throw error;
@@ -50,11 +44,7 @@ conn.connect((error) => {
     console.log('connected as id ' + conn.threadId);
 });
 
-// conn.on('error', (err) => {
-
-//     console.log('shiz, I errored', err.code);
-// });
-
+//home page GET route
 app.get('/', (req, res) => {
 
     conn.query('SELECT * FROM beer;', (error, data) => {
@@ -68,6 +58,7 @@ app.get('/', (req, res) => {
     });
 });
 
+//POST route for new beers
 app.post('/new', (req, res) => {
 
     console.log(req.body.beer);
@@ -83,6 +74,7 @@ app.post('/new', (req, res) => {
     });
 });
 
+//POST route for beers that have been chugged
 app.post('/new/chug', (req, res) => {
 
     console.log(req.body);
@@ -102,6 +94,7 @@ app.post('/new/chug', (req, res) => {
     });
 });
 
+//POST route for clearing the table off (i.e. recycling)
 app.post('/new/recycling', (req, res) => {
 
     conn.query('DELETE FROM beer;', (error, data) => {
@@ -114,12 +107,6 @@ app.post('/new/recycling', (req, res) => {
         res.redirect('/');
     });
 });
-//importing my route modules & calling the functions that house them
-// const htmlR = require('./app/routing/htmlRoutes.js');
-// htmlR(app, __dirname);
-
-// const apiR = require('./app/routing/apiRoutes.js');
-// apiR(app, __dirname);
 
 //setting the server to listen to the dynamic port
 app.listen(PORT, () => {
