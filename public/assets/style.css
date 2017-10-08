@@ -1,0 +1,14 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: url('https://media.timeout.com/images/103378058/image.jpg') no-repeat center;
+}
+
+ul {
+    list-style: none;
+}
