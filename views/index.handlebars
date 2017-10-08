@@ -1,0 +1,74 @@
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<section class="container">
+    <div class="row">
+        <div class="col-lg-4 text-center" id="full-beer">
+            <ol>
+                {{#each beer}}{{#unless chugged}}
+                <ul>
+                    <form action="/new/chug" method="POST" id="bottomsUp">
+                        <textarea name="id" value="{{this.id}}" chugged="{{this.chugged}}">{{this.id}} {{this.beer}}</textarea>
+                        <button type="submit" id="chug">Chug it!</button>
+                    </form>
+                </ul>
+                {{/unless}}{{/each}}
+            </ol>
+        </div>
+        <!-- bar -->
+        <div class="col-lg-4 text-center">
+            <form action="/new" method="POST" id="bartender">
+                <!-- text input -->
+                <textarea type="text" name="beer" value="{{this.id}}" placeholder="What'll it be?"></textarea>
+                <br>
+                <!-- submit drink order -->
+                <button type="submit" class="btn btn-danger" id="order">Order A Beer</button>
+                <br><br>
+            </form>
+        </div>
+        <!-- bottle recycling -->
+        <div class="col-lg-4 text-center" id="mt-beer">
+            <ol>
+                <form action="/new/recycling" method="POST">
+                    <ul>
+                        {{#each beer}}{{#if chugged}}
+                        <p chugged={{this.chugged}}>
+                            <textarea>{{this.id}}. {{this.beer}}</textarea>
+                        </p>
+                        {{/if}}{{/each}}
+                        <button type="submit" class="btn btn-warning" id="clearTable">Clear Table</button>
+                    </ul>
+                </form>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $('#order').on('submit', (event) => {
+
+        event.preventDefault();
+
+        var beer = {
+
+            beer: $('#bartender').val().trim()
+        }
+    });
+
+    $('#chug').on('submit', (event) => {
+
+        event.preventDefault();
+
+        var id = {
+
+            id: $('#bottomsUp').val().trim()
+        }
+    });
+
+    $('#clearTable').on('submit'), (event) => {
+
+        event.preventDefault();
+    }
+
+</script>
