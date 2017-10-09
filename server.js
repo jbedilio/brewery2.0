@@ -28,13 +28,22 @@ app.set('view engine', 'handlebars');
 //requiring mysql
 const mysql = require('mysql');
 
-//setting the mysql connection object
-const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: "",
-    database: 'beersDB'
-});
+const conn;
+
+if (process.env.JAWSDB_URL) {
+
+    conn = mysql.createConnection(process.env.JAWSDB_URL);
+
+} else {
+
+    //setting the mysql connection object
+    conn = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: "",
+        database: 'beersDB'
+    });
+};
 
 //establishing the connection for mysql
 conn.connect((error) => {
