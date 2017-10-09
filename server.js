@@ -28,7 +28,7 @@ app.set('view engine', 'handlebars');
 //requiring mysql
 const mysql = require('mysql');
 
-const conn;
+var conn;
 
 if (process.env.JAWSDB_URL) {
 
