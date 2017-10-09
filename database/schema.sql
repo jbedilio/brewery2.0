@@ -11,5 +11,7 @@ CREATE TABLE beer (
 
     `chugged` BOOLEAN DEFAULT false,
 
+    `createdAt` TIMESTAMP NOT NULL,
+
     PRIMARY KEY (`id`)
 );
