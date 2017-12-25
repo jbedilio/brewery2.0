@@ -9,7 +9,7 @@
                 {{#each beer}}{{#unless chugged}}
                 <ul>
                     <form action="/new/chug" method="POST" id="bottomsUp">
-                        <textarea name="id" value="{{this.id}}" chugged="{{this.chugged}}">{{this.id}} {{this.beer}}</textarea>
+                        <textarea name="id" value="{{this.id}}" chugged="{{this.chugged}}">{{this.id}}. {{this.beer}}</textarea>
                         <button type="submit" id="chug">Chug it!</button>
                     </form>
                 </ul>
